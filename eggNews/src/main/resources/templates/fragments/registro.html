@@ -1,0 +1,35 @@
+<!------------FORMULARIO-------->
+<div class="container">
+    <form th:action="@{/admin/registro_periodista}" method="post">
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Ingrese nombre de usuario</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_name" th:value="${user_name}">
+          
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ingrese correro electrónico</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" th:value="${email}">
+            
+          </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ingrese contraseña</label>
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="password" th:value="${password}">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Repita de nuevo la contraseña</label>
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="password2" th:value="${password2}">
+            
+        </div>
+        
+        <button type="submit" class="btn btn-dark">Subir</button>
+      </form>
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <a class="btn btn-secondary btn-lg" th:href="@{/admin}" role="button">Volver</a>
+      </div>
+    </div>

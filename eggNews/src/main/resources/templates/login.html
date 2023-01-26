@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/}">
+        <img src="\images\logo.png" alt="Bootstrap" width="80" height="70">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!------------FORMULARIO-------->
+  <div class="container">
+    
+    <form action="/logincheck" method="post">
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Ingrese nombre de usuario</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+
+      </div>
+
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Ingrese contraseña</label>
+        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          name="password">
+
+      </div>
+
+
+      <button type="submit" class="btn btn-dark">Ingresar</button>
+
+    </form>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <a class="btn btn-secondary btn-lg" th:href="@{/}" role="button">Volver</a>
+    </div>
+
+
+  </div>
+
+  <div th:replace="/fragments/footer :: footer"></div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="\images\logo.png" alt="Bootstrap" width="80" height="70">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Listas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Administración
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"""></a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/agregar}">Agregar</a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/lista}">Modificar o eliminar</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Periodistas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"></a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/registrar_periodista}">Crear Periodistas</a>
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/admin/lista_periodista}">Configuración</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"></a></li>
+                            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-------TABLA DE LISTADO----------->
+
+    <div class="container">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo Electrónico</th>
+                    <th scope="col">Sueldo</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody th:each="periodista : ${periodistas}">
+                <tr>
+                    <th scope="row" th:text="${periodista.Id}"></th>
+                    <td th:text="${periodista.user_name}"></td>
+                    <td th:text="${periodista.email}"></td>
+                    <td th:text="${periodista.sueldo}"></td>
+                    <td>
+                        <a th:href="@{/admin/baja_periodista/__${periodista.Id}__}"><i
+                                class="bi bi-file-arrow-down"></i>Dar de baja</a>
+                        <a th:href="@{/admin/alta_periodista/__${periodista.Id}__}"><i
+                                class="bi bi-file-arrow-up"></i></i>Dar de alta</a>
+                        <a th:href="@{/admin/eliminar_periodista/__${periodista.Id}__}"
+                            sec:authorize="hasRole('ADMIN')"><i class="bi bi-trash"></i>Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!---------------------------------------------------------->
+
+    <div class="container">
+        <form th:action="@{/admin/lista_periodista}" method="post">
+
+
+            <div class="form-check form-switch" th:each="periodista : ${periodistas}">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="Id" th:value="${periodista.id}">
+                <label class="form-check-label" for="flexSwitchCheckDefault" th:text="${periodista.user_name}"></label>
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" name="sueldo">
+                <span class="input-group-text">.00</span>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Subir</button>
+        </form>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a class="btn btn-secondary btn-lg" th:href="@{/inicio}" role="button">Volver</a>
+        </div>
+    </div>
+    <div th:replace="/fragments/footer :: footer"></div>
+</body>
+
+</html>
+
+
+

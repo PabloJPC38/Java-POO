@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/fragments/head :: head"> </head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">
+                    <img src="\images\logo.png" alt="Bootstrap" width="80" height="70">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@{/inicio/noticias}">Listas</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Perfil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"></a></li>
+                                <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                                <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="b-example-divider"></div>
+
+        <div class="container col-xxl-8 px-4 py-5">
+            <div class="row flex-lg-row-reverse align-items-center g-5 py-5 border shadow-lg ">
+                <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="\images\portada.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes"
+                        width="900" height="700" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3">Bienvenido</h1>
+                    <p class="lead">Página de noticias</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <button type="" class="btn btn-dark btn-lg px-4 me-md-2">Ver noticias</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div th:replace="/fragments/footer :: footer"></div>
+
+</body>
+
+</html>

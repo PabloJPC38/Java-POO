@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="\images\logo.png" alt="Bootstrap" width="80" height="70">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Listas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Administración
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"""></a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/agregar}">Agregar</a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/lista}">Modificar o eliminar</a></li>
+                        </ul>
+                    </li>
+    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Periodistas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"""></a></li>
+                            <li><a class="dropdown-item" href="#">Crear Periodistas</a></li>
+                            <li><a class="dropdown-item" href="#">Configuración</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"""></a></li>
+                            <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                            
+                        </ul>
+                    </li>
+    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!------------FORMULARIO-------->
+<div class="container">
+    <form th:action="@{/admin/registro_periodista}" method="post">
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Ingrese nombre de periodista</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_name" th:value="${user_name}">
+          
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ingrese correro electrónico</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" th:value="${email}">
+            
+          </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ingrese contraseña</label>
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="password" th:value="${password}">
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Repita de nuevo la contraseña</label>
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="password2" th:value="${password2}">
+            
+        </div>
+        
+        <button type="submit" class="btn btn-dark">Subir</button>
+      </form>
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <a class="btn btn-secondary btn-lg" th:href="@{/admin}" role="button">Volver</a>
+      </div>
+    </div>
+
+
+    <footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

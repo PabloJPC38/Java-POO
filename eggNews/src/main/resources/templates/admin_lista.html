@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+  
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="\images\logo.png" alt="Bootstrap" width="80" height="70">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Listas</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Administración
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"""></a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/agregar}">Agregar</a></li>
+                        <li><a class="dropdown-item" th:href="@{/admin/lista}">Modificar o eliminar</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Periodistas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"""></a></li>
+                        <li><a class="dropdown-item" href="#">Crear Periodistas</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"""></a></li>
+                        <li><a class="dropdown-item" href="#">Ver Perfil</a></li>
+                        <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+                        
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+      <!-------TABLA DE LISTADO----------->
+
+      <div class="container">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody th:each="noticia : ${noticias}">
+          <tr>
+            <th scope="row" th:text="${noticia.Id}"></th>
+            <td th:text="${noticia.titulo}"></td>
+            <td>
+                <a th:href="@{/admin/modificar/__${noticia.Id}__}"><i class="bi bi-pencil-square"></i>Modificar</a> -
+                <a th:href="@{/admin/eliminar/__${noticia.Id}__}" sec:authorize="hasRole('ADMIN')"><i class="bi bi-trash"></i>Eliminar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div th:replace="/fragments/footer :: footer"></div>
+</body>
+</html>
